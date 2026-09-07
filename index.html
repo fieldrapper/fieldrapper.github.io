@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FIELD | Official Hub</title>
+<link rel="stylesheet" href="styles.css">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&family=Oswald:wght@600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+<div class="bg-glow"></div>
+
+<nav class="navbar">
+  <div class="nav-brand">
+    <span class="logo">FIELD</span>
+    <span class="tagline">THE FIELD IS YOURS</span>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#home" class="nav-link active" data-section="home">Home</a></li>
+    <li><a href="#feed" class="nav-link" data-section="feed">Feed</a></li>
+    <li><a href="#channels" class="nav-link" data-section="channels">Channels</a></li>
+    <li><a href="#music" class="nav-link" data-section="music">Music</a></li>
+    <li><a href="#news" class="nav-link" data-section="news">News</a></li>
+    <li><a href="#messages" class="nav-link" data-section="messages">DMs</a></li>
+  </ul>
+  <div class="nav-auth">
+    <button type="button" id="loginBtn" class="btn-outline">Login</button>
+    <button type="button" id="registerBtn" class="btn-primary">Join The Field</button>
+    <div id="userMenu" class="user-menu hidden">
+      <span id="userDisplay" class="user-chip"></span>
+      <button type="button" id="logoutBtn" class="btn-outline sm">Logout</button>
+    </div>
+  </div>
+  <button class="mobile-toggle" id="mobileToggle"><i class="fas fa-bars"></i></button>
+</nav>
+
+<!-- HOME -->
+<section id="home" class="hero section-panel active">
+  <div class="hero-inner">
+    <div class="hero-copy">
+      <div class="badge">OFFICIAL HUB · 2026</div>
+      <h1><span>THIS IS</span><span class="gold">FIELD</span></h1>
+      <p class="lead">Channels. Music. News. DMs. The full Field experience — built for the culture.</p>
+      <div class="hero-actions">
+        <button type="button" class="btn-primary large" data-go="feed">Enter the Feed</button>
+        <button type="button" class="btn-outline large" data-go="channels">Explore Channels</button>
+      </div>
+      <div class="hero-stats">
+        <div><strong id="statUsers">1</strong><span>Members</span></div>
+        <div><strong id="statPosts">0</strong><span>Posts</span></div>
+        <div><strong id="statTracks">0</strong><span>Tracks</span></div>
+        <div><strong id="statChannels">0</strong><span>Channels</span></div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="vinyl"><div class="vinyl-label">FIELD</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- FEED -->
+<section id="feed" class="section-panel">
+  <div class="container">
+    <div class="panel-header">
+      <div>
+        <span class="eyebrow">SOCIAL</span>
+        <h2>The Feed</h2>
+        <p>Text, images, audio, video links — post it all.</p>
+      </div>
+      <button type="button" id="newPostBtn" class="btn-primary"><i class="fas fa-plus"></i> New Post</button>
+    </div>
+    <div id="feedList" class="feed-list"></div>
+    <div id="feedEmpty" class="empty-state"><i class="fas fa-stream"></i><h3>No posts yet</h3><p>Be the first to drop something.</p></div>
+  </div>
+</section>
+
+<!-- CHANNELS (Reddit-style) -->
+<section id="channels" class="section-panel">
+  <div class="container">
+    <div class="panel-header">
+      <div>
+        <span class="eyebrow">COMMUNITIES</span>
+        <h2>Channels</h2>
+        <p>Create and join channels like subreddits. Talk bars, shows, beats, life.</p>
+      </div>
+      <button type="button" id="newChannelBtn" class="btn-primary"><i class="fas fa-plus"></i> Create Channel</button>
+    </div>
+    <div class="channels-layout">
+      <aside class="channel-sidebar">
+        <h4>Your Channels</h4>
+        <div id="channelList" class="channel-list"></div>
+      </aside>
+      <main class="channel-main">
+        <div id="channelView" class="channel-view">
+          <div class="empty-state"><i class="fas fa-comments"></i><h3>Pick a channel</h3><p>Select one from the left or create your own.</p></div>
+        </div>
+      </main>
+    </div>
+  </div>
+</section>
+
+<!-- MUSIC -->
+<section id="music" class="section-panel">
+  <div class="container">
+    <div class="panel-header">
+      <div>
+        <span class="eyebrow">AUDIO</span>
+        <h2>Music Vault</h2>
+        <p>Upload tracks. Play them right here. Share with the Field.</p>
+      </div>
+      <button type="button" id="uploadMusicBtn" class="btn-primary"><i class="fas fa-upload"></i> Upload Track</button>
+    </div>
+    <input type="file" id="musicFileInput" accept="audio/*" multiple hidden>
+    <div id="musicGrid" class="music-grid"></div>
+    <div id="musicEmpty" class="empty-state"><i class="fas fa-music"></i><h3>No tracks yet</h3><p>Upload the first one.</p></div>
+  </div>
+</section>
+
+<!-- NEWS (password) -->
+<section id="news" class="section-panel">
+  <div class="container">
+    <div class="panel-header">
+      <div>
+        <span class="eyebrow">OFFICIAL</span>
+        <h2>Field News</h2>
+        <p>Global drops & announcements. Password protected.</p>
+      </div>
+      <button type="button" id="newsUnlockBtn" class="btn-primary"><i class="fas fa-lock"></i> Unlock News Desk</button>
+    </div>
+    <div id="newsFormWrap" class="news-form-wrap hidden">
+      <div class="card form-card">
+        <input type="text" id="newsTitle" placeholder="Headline">
+        <textarea id="newsBody" rows="4" placeholder="Write the news..."></textarea>
+        <label class="check"><input type="checkbox" id="newsToFeed" checked> Also post to main Feed</label>
+        <button type="button" id="publishNewsBtn" class="btn-primary full">Publish News</button>
+      </div>
+    </div>
+    <div id="newsList" class="news-list"></div>
+    <div id="newsEmpty" class="empty-state"><i class="fas fa-newspaper"></i><h3>No news yet</h3><p>Official updates will land here.</p></div>
+  </div>
+</section>
+
+<!-- DMS -->
+<section id="messages" class="section-panel">
+  <div class="container">
+    <div class="panel-header">
+      <div>
+        <span class="eyebrow">INBOX</span>
+        <h2>Direct Messages</h2>
+        <p>Private convos with other Field members on this device.</p>
+      </div>
+      <button type="button" id="newDmBtn" class="btn-primary"><i class="fas fa-pen"></i> New Message</button>
+    </div>
+    <div class="dm-layout">
+      <aside class="dm-sidebar">
+        <div id="dmThreads" class="dm-threads"></div>
+      </aside>
+      <main class="dm-main">
+        <div id="dmChat" class="dm-chat">
+          <div class="empty-state"><i class="fas fa-inbox"></i><h3>No conversation selected</h3><p>Pick a thread or start a new one.</p></div>
+        </div>
+      </main>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container footer-inner">
+    <div><span class="logo">FIELD</span><p>The Field is Yours.</p></div>
+    <div class="footer-links">
+      <a href="#feed" data-go="feed">Feed</a>
+      <a href="#channels" data-go="channels">Channels</a>
+      <a href="#music" data-go="music">Music</a>
+      <a href="#news" data-go="news">News</a>
+      <a href="#messages" data-go="messages">DMs</a>
+    </div>
+    <p class="copy">© 2026 Field Official · All rights reserved</p>
+  </div>
+</footer>
+
+<!-- AUTH MODAL -->
+<div id="authModal" class="modal hidden">
+  <div class="modal-backdrop"></div>
+  <div class="modal-box">
+    <button class="modal-x" data-close="authModal"><i class="fas fa-times"></i></button>
+    <div class="tabs">
+      <button class="tab on" data-tab="login">Login</button>
+      <button class="tab" data-tab="register">Join</button>
+    </div>
+    <form id="loginForm" class="form">
+      <h3>Welcome back</h3>
+      <input id="loginUser" placeholder="Username" required>
+      <input id="loginPass" type="password" placeholder="Password" required>
+      <button class="btn-primary full" type="submit">Login</button>
+    </form>
+    <form id="registerForm" class="form hidden">
+      <h3>Join The Field</h3>
+      <input id="regUser" placeholder="Username" minlength="3" required>
+      <input id="regEmail" type="email" placeholder="Email" required>
+      <input id="regPass" type="password" placeholder="Password" minlength="6" required>
+      <input id="regPass2" type="password" placeholder="Confirm password" required>
+      <button class="btn-primary full" type="submit">Create Account</button>
+    </form>
+  </div>
+</div>
+
+<!-- POST MODAL -->
+<div id="postModal" class="modal hidden">
+  <div class="modal-backdrop"></div>
+  <div class="modal-box wide">
+    <button class="modal-x" data-close="postModal"><i class="fas fa-times"></i></button>
+    <h3>New Post</h3>
+    <form id="postForm" class="form">
+      <textarea id="postText" rows="4" placeholder="What's on your mind?"></textarea>
+      <div class="media-row">
+        <label class="file-btn"><i class="fas fa-image"></i> Image<input type="file" id="postImage" accept="image/*" hidden></label>
+        <label class="file-btn"><i class="fas fa-music"></i> Audio<input type="file" id="postAudio" accept="audio/*" hidden></label>
+        <label class="file-btn"><i class="fas fa-file"></i> File<input type="file" id="postFile" hidden></label>
+      </div>
+      <div id="postPreview" class="preview-box"></div>
+      <button class="btn-primary full" type="submit">Post to Feed</button>
+    </form>
+  </div>
+</div>
+
+<!-- CHANNEL MODAL -->
+<div id="channelModal" class="modal hidden">
+  <div class="modal-backdrop"></div>
+  <div class="modal-box">
+    <button class="modal-x" data-close="channelModal"><i class="fas fa-times"></i></button>
+    <h3>Create Channel</h3>
+    <form id="channelForm" class="form">
+      <input id="channelName" placeholder="Channel name (e.g. bars)" required maxlength="30">
+      <textarea id="channelDesc" rows="3" placeholder="What is this channel about?" maxlength="200"></textarea>
+      <button class="btn-primary full" type="submit">Create</button>
+    </form>
+  </div>
+</div>
+
+<!-- CHANNEL POST MODAL -->
+<div id="channelPostModal" class="modal hidden">
+  <div class="modal-backdrop"></div>
+  <div class="modal-box">
+    <button class="modal-x" data-close="channelPostModal"><i class="fas fa-times"></i></button>
+    <h3>Post to Channel</h3>
+    <form id="channelPostForm" class="form">
+      <input type="hidden" id="channelPostId">
+      <textarea id="channelPostText" rows="4" placeholder="Say something..." required></textarea>
+      <button class="btn-primary full" type="submit">Post</button>
+    </form>
+  </div>
+</div>
+
+<!-- PASSWORD MODAL -->
+<div id="passModal" class="modal hidden">
+  <div class="modal-backdrop"></div>
+  <div class="modal-box center">
+    <button class="modal-x" data-close="passModal"><i class="fas fa-times"></i></button>
+    <div class="lock-icon"><i class="fas fa-shield-alt"></i></div>
+    <h3>News Desk Access</h3>
+    <p class="muted">Enter the Field password</p>
+    <form id="passForm" class="form">
+      <input id="newsPass" type="password" placeholder="Password" autocomplete="off" required>
+      <button class="btn-primary full" type="submit">Unlock</button>
+    </form>
+  </div>
+</div>
+
+<!-- DM MODAL -->
+<div id="dmModal" class="modal hidden">
+  <div class="modal-backdrop"></div>
+  <div class="modal-box">
+    <button class="modal-x" data-close="dmModal"><i class="fas fa-times"></i></button>
+    <h3>New Message</h3>
+    <form id="dmForm" class="form">
+      <input id="dmTo" placeholder="Username" required>
+      <textarea id="dmText" rows="3" placeholder="Message..." required></textarea>
+      <button class="btn-primary full" type="submit">Send</button>
+    </form>
+  </div>
+</div>
+
+<div id="toast" class="toast hidden"></div>
+<audio id="globalAudio"></audio>
+
+<script src="app.js"></script>
+</body>
+</html>
