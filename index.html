@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FIELD | Official Hub</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&family=Oswald:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+    <div class="bg-animation">
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+    </div>
+
+    <nav class="navbar">
+        <div class="nav-brand">
+            <span class="logo">FIELD</span>
+            <span class="tagline">THE FIELD IS YOURS</span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="#home" class="nav-link active">Home</a></li>
+            <li><a href="#feed" class="nav-link">Feed</a></li>
+            <li><a href="#music" class="nav-link">Music</a></li>
+            <li><a href="#news" class="nav-link">News</a></li>
+            <li><a href="#upload" class="nav-link">Files</a></li>
+        </ul>
+        <div class="nav-auth">
+            <button id="loginBtn" class="btn-outline">Login</button>
+            <button id="registerBtn" class="btn-primary">Join</button>
+            <div id="userMenu" class="user-menu hidden">
+                <span id="userDisplay"></span>
+                <button id="logoutBtn" class="btn-outline">Logout</button>
+            </div>
+        </div>
+        <button class="mobile-toggle" id="mobileToggle"><i class="fas fa-bars"></i></button>
+    </nav>
+
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <div class="hero-badge">OFFICIAL HUB</div>
+            <h1 class="hero-title">
+                <span class="line">THIS IS</span>
+                <span class="line gold">FIELD</span>
+            </h1>
+            <p class="hero-subtitle">Share music. Drop bars. Post news. The Field is open.</p>
+            <div class="hero-cta">
+                <a href="#feed" class="btn-primary large">Enter The Feed</a>
+                <a href="#music" class="btn-outline large">Upload Music</a>
+            </div>
+        </div>
+        <div class="hero-visual">
+            <div class="vinyl">
+                <div class="vinyl-inner"><div class="vinyl-label">FIELD</div></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Social Feed -->
+    <section id="feed" class="section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">THE FEED</span>
+                <h2 class="section-title">Community Posts</h2>
+                <p class="section-desc">Real posts from real people. Music, thoughts, bars — everything drops here.</p>
+            </div>
+            <div class="feed-actions">
+                <button id="newPostBtn" class="btn-primary"><i class="fas fa-plus"></i> New Post</button>
+            </div>
+            <div id="postsList" class="posts-list"></div>
+            <div id="emptyFeed" class="empty-state">
+                <i class="fas fa-comments"></i>
+                <h3>No posts yet</h3>
+                <p>Be the first to post something.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Music Section - Open to Everyone -->
+    <section id="music" class="section music-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">MUSIC</span>
+                <h2 class="section-title">Community Drops</h2>
+                <p class="section-desc">Anyone can upload music. Share your tracks with The Field.</p>
+            </div>
+            <div class="upload-music-card">
+                <div class="upload-icon"><i class="fas fa-music"></i></div>
+                <h3>Upload Your Music</h3>
+                <p>Open to everyone. Drop tracks, beats, freestyles.</p>
+                <input type="file" id="musicInput" accept="audio/*,.mp3,.wav,.m4a,.flac" multiple hidden>
+                <button id="musicUploadBtn" class="btn-primary large"><i class="fas fa-cloud-upload-alt"></i> Choose Music Files</button>
+                <div id="musicFileList" class="file-list"></div>
+                <button id="submitMusicBtn" class="btn-primary full hidden" disabled>Post Music to Community</button>
+            </div>
+            <div class="uploaded-files">
+                <h4>Latest Music Uploads</h4>
+                <div id="musicGrid" class="files-grid"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- News Section - Password Protected -->
+    <section id="news" class="section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">GLOBAL NEWS</span>
+                <h2 class="section-title">Field News</h2>
+                <p class="section-desc">Official updates and global drops. Protected by password.</p>
+            </div>
+            <div class="news-upload-card">
+                <div class="upload-icon news"><i class="fas fa-newspaper"></i></div>
+                <h3>Post Global News</h3>
+                <p>Only Field can post official news. Password required.</p>
+                <button id="newsUnlockBtn" class="btn-primary large"><i class="fas fa-lock"></i> Unlock News Upload</button>
+                <div id="newsUploadArea" class="upload-area hidden">
+                    <div class="form-group">
+                        <label>News Title</label>
+                        <input type="text" id="newsTitle" placeholder="Headline...">
+                    </div>
+                    <div class="form-group">
+                        <label>News Content</label>
+                        <textarea id="newsContent" rows="4" placeholder="Write the news..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Attach Files (optional)</label>
+                        <input type="file" id="newsFileInput" multiple>
+                    </div>
+                    <div class="checkbox-row">
+                        <label><input type="checkbox" id="alsoCommunity" checked> Also post to Community Feed</label>
+                    </div>
+                    <button id="submitNewsBtn" class="btn-primary full">Publish News</button>
+                </div>
+            </div>
+            <div id="newsList" class="news-list"></div>
+            <div id="emptyNews" class="empty-state">
+                <i class="fas fa-newspaper"></i>
+                <h3>No news yet</h3>
+                <p>Official news will appear here.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Community Files - Open -->
+    <section id="upload" class="section upload-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">FILES</span>
+                <h2 class="section-title">Community Files</h2>
+                <p class="section-desc">Share any files with the crew. Open to everyone.</p>
+            </div>
+            <div class="upload-card">
+                <div class="upload-icon"><i class="fas fa-cloud-upload-alt"></i></div>
+                <h3>Upload Files</h3>
+                <p>Images, docs, videos, anything. Free for all members.</p>
+                <input type="file" id="fileInput" multiple hidden>
+                <button id="fileUploadBtn" class="btn-primary large"><i class="fas fa-plus"></i> Choose Files</button>
+                <div id="fileList" class="file-list"></div>
+                <button id="submitFileBtn" class="btn-primary full hidden" disabled>Upload to Community</button>
+            </div>
+            <div class="uploaded-files">
+                <h4>Community Files</h4>
+                <div id="communityFiles" class="files-grid"></div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-brand">
+                <span class="logo">FIELD</span>
+                <p>The Field is Yours.</p>
+            </div>
+            <div class="footer-links">
+                <a href="#home">Home</a>
+                <a href="#feed">Feed</a>
+                <a href="#music">Music</a>
+                <a href="#news">News</a>
+            </div>
+            <div class="footer-copy"><p>&copy; 2026 Field Official</p></div>
+        </div>
+    </footer>
+
+    <!-- Auth Modal -->
+    <div id="authModal" class="modal hidden">
+        <div class="modal-overlay"></div>
+        <div class="modal-content">
+            <button class="modal-close" id="closeModal"><i class="fas fa-times"></i></button>
+            <div class="modal-tabs">
+                <button class="tab-btn active" data-tab="login">Login</button>
+                <button class="tab-btn" data-tab="register">Join</button>
+            </div>
+            <form id="loginForm" class="auth-form">
+                <h3>Welcome Back</h3>
+                <div class="form-group">
+                    <label>Username</label>
+                    <input type="text" id="loginUser" required placeholder="Username">
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="loginPass" required placeholder="Password">
+                </div>
+                <button type="submit" class="btn-primary full">Login</button>
+            </form>
+            <form id="registerForm" class="auth-form hidden">
+                <h3>Join The Field</h3>
+                <div class="form-group">
+                    <label>Username</label>
+                    <input type="text" id="regUser" required minlength="3" placeholder="Choose username">
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" id="regEmail" required placeholder="Email">
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="regPass" required minlength="6" placeholder="Password">
+                </div>
+                <div class="form-group">
+                    <label>Confirm Password</label>
+                    <input type="password" id="regPass2" required placeholder="Confirm">
+                </div>
+                <button type="submit" class="btn-primary full">Create Account</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- New Post Modal -->
+    <div id="postModal" class="modal hidden">
+        <div class="modal-overlay"></div>
+        <div class="modal-content">
+            <button class="modal-close" id="closePostModal"><i class="fas fa-times"></i></button>
+            <h3>Create Post</h3>
+            <form id="postForm" class="auth-form">
+                <div class="form-group">
+                    <label>What's on your mind?</label>
+                    <textarea id="postContent" required rows="4" placeholder="Drop a thought, bar, or update..." maxlength="1000"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Add Media (optional)</label>
+                    <input type="file" id="postMediaInput" accept="image/*,video/*,audio/*" multiple>
+                    <div id="postMediaList" class="file-list"></div>
+                </div>
+                <button type="submit" class="btn-primary full">Post to Feed</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Password Modal for News -->
+    <div id="passModal" class="modal hidden">
+        <div class="modal-overlay"></div>
+        <div class="modal-content pass-modal">
+            <button class="modal-close" id="closePassModal"><i class="fas fa-times"></i></button>
+            <div class="pass-icon"><i class="fas fa-shield-alt"></i></div>
+            <h3>News Access</h3>
+            <p>Enter the password to post global news.</p>
+            <form id="passForm" class="auth-form">
+                <div class="form-group">
+                    <input type="password" id="communityPass" required placeholder="Enter password" autocomplete="off">
+                </div>
+                <button type="submit" class="btn-primary full">Unlock</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="toast" class="toast hidden"></div>
+    <script src="app.js"></script>
+</body>
+</html>
